@@ -2,6 +2,9 @@
 
 A Home Assistant custom integration for Qcells Cloud solar inverters.
 
+## Problems
+    At the moment the Integration dosent work with HACS its still work in Progress 
+
 ## Features
 
 - Real-time data retrieval from Qcells Cloud API
@@ -20,6 +23,47 @@ A Home Assistant custom integration for Qcells Cloud solar inverters.
 3. Go to **Settings > Devices & Services > Add Integration**.
 
 4. Search for "Qcells Cloud" and follow the setup wizard.
+
+#### Example SSH / host shell commands
+
+If you are connected to the Home Assistant VM via SSH or are using the Home Assistant OS CLI, you need a real shell first.
+
+In the HA OS CLI (`ha>` prompt), run:
+
+```bash
+login
+```
+
+After that you should see a shell prompt like `#`.
+
+Then use the normal shell commands:
+
+```bash
+cd /config/custom_components
+```
+
+If `/config/custom_components` does not exist, try:
+
+```bash
+cd /mnt/data/supervisor/homeassistant/custom_components
+```
+
+Then clone or update the repo:
+
+```bash
+# clone the repository once into the qcells_cloud folder
+git clone https://github.com/<your-username>/qcells_cloud_integration_scaffold.git qcells_cloud
+
+# if the repo already exists, update it from main
+git -C qcells_cloud pull origin main
+```
+
+Note: In Home Assistant OS, the built-in shell often does not include `git` and you cannot install it there with `sudo` or `apt`.
+If `git` is not available, use one of these alternatives:
+
+- Use the SSH add-on or Web Terminal add-on that provides a shell with `git`.
+- Copy the `custom_components/qcells_cloud` folder from another machine via Samba, SCP, or USB.
+- Download the repository on your PC and upload it into `config/custom_components/qcells_cloud`.
 
 ### Method 2: HACS (Recommended)
 
@@ -115,6 +159,10 @@ logger:
   logs:
     custom_components.qcells_cloud: debug
 ```
+
+### HACS unknown error
+
+If HACS shows an "unknown error," try the manual installation method above first. This usually means the repository metadata or HACS repository scan did not complete correctly, but the integration can still work when installed manually.
 
 ## Contributing
 
