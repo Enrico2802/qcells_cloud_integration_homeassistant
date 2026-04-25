@@ -1,0 +1,33 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Qcells Cloud",
+        "description": "Connect Home Assistant to the Qcells Cloud realtime API.",
+        "data": {
+          "base_url": "Base URL",
+          "wifi_sn": "WiFi SN",
+          "api_key": "API key / tokenId",
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Authentication failed"
+    },
+    "abort": {
+      "already_configured": "This WiFi SN is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Qcells Cloud options",
+        "data": {
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    }
+  }
+}
