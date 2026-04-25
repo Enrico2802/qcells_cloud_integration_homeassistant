@@ -36,5 +36,3 @@ python -m pip install -r requirements.txt
 - `voluptuous` für die Eingabevalidierung im Config Flow
 - `homeassistant` als Basisplattform
 
-## Lizenz
-Keine Lizenzinformation im Repository definiert. Füge bei Bedarf eine `LICENSE`-Datei hinzu.
