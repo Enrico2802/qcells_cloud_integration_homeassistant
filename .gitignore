@@ -7,6 +7,8 @@ __pycache__
 .env
 .env.local
 .env.*.local
+.env_prod
+.env_produktiv
 
 # Home Assistant config (if copied for testing)
 config/

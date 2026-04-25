@@ -1,94 +1,126 @@
 # Qcells Cloud Home Assistant Integration
 
-Dieses Repository enthält ein Home Assistant Custom-Integration-Scaffold für die Qcells Cloud.
+A Home Assistant custom integration for Qcells Cloud solar inverters.
 
-## Inhalt
-- `qcells_cloud/custom_components/qcells_cloud`: Custom Component für Home Assistant
-- `qcells_cloud/custom_components/qcells_cloud/test_api.py`: Standalone Python-Skript zum Testen der Qcells API
-- `requirements.txt`: Python-Abhängigkeiten, die für lokale Tests oder Entwicklung per `pip` installiert werden können
+## Features
+
+- Real-time data retrieval from Qcells Cloud API
+- Automatic sensor creation for power, energy, battery status, and more
+- Configurable polling interval
+- Secure credential management
 
 ## Installation
 
-### 1. Python-Abhängigkeiten installieren
-Für lokale Entwicklung oder wenn du die Python-Bibliotheken manuell installieren möchtest:
+### Method 1: Manual Installation
 
-```bash
-python -m pip install -r requirements.txt
-```
+1. Copy the `qcells_cloud/custom_components/qcells_cloud/` directory to your Home Assistant `config/custom_components/` directory.
 
-> Hinweis: `homeassistant` wird hier nicht als Pflicht-Installation aufgeführt. Wenn du die Integration in einer echten Home Assistant-Instanz nutzt, bringt Home Assistant selbst die benötigten Bibliotheken mit.
+2. Restart Home Assistant.
 
-### 2. Home Assistant Custom Component installieren
-1. Kopiere den Ordner `qcells_cloud/custom_components/qcells_cloud` nach `config/custom_components/qcells_cloud` in deiner Home Assistant-Installation.
-2. Starte Home Assistant neu.
-3. Gehe zu **Einstellungen → Geräte & Dienste → Integration hinzufügen**.
-4. Suche nach **Qcells Cloud**.
-5. Gib die folgenden Werte ein:
-   - Base URL
-   - LAN Adapter Registration number (NICHT die Wechselrichter Device SN!)
-   - API key / tokenId
-   - Abfrageintervall
+3. Go to **Settings > Devices & Services > Add Integration**.
 
-## API testen
+4. Search for "Qcells Cloud" and follow the setup wizard.
 
-Um die Qcells API unabhängig von Home Assistant zu testen:
+### Method 2: HACS (Recommended)
 
-1. **Umgebung einrichten:**
+This integration is available through HACS (Home Assistant Community Store).
+
+1. Add this repository to HACS as a custom repository.
+2. Install the "Qcells Cloud" integration.
+3. Restart Home Assistant and configure through the UI.
+
+## Configuration
+
+During setup, you will need to provide:
+
+- **Base URL**: The Qcells Cloud API endpoint (usually pre-filled)
+- **LAN Adapter Registration Number**: Your Qcells LAN adapter registration number (NOT the inverter device SN)
+- **API Key**: Your Qcells Cloud API token
+- **Polling Interval**: How often to fetch data (10-600 seconds)
+
+## Available Sensors
+
+The integration creates the following sensors:
+
+### Power & Energy
+- AC Power (W)
+- Feed-in Power (W)
+- Battery Power (W)
+- Daily Energy Yield (kWh)
+- Total Energy Yield (kWh)
+
+### Battery
+- State of Charge (%)
+- Battery Status
+
+### DC Strings
+- DC Power per string (W)
+
+### System
+- Inverter Status
+- Last Update Time
+
+## API Testing
+
+To test the Qcells API independently:
+
+1. **Set up environment variables:**
    ```bash
-   # Kopiere die Beispiel-Konfigurationsdatei
+   # For development: Copy the example configuration file
    cp .env.example .env
+   # Edit .env with your actual values
 
-   # Bearbeite .env und setze deine echten Werte
-   nano .env  # oder verwende deinen bevorzugten Editor
+   # For production: The .env_prod file is loaded automatically if present
    ```
 
-2. **Python-Abhängigkeiten installieren:**
+2. **Install Python dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Test-Skript ausführen:**
+3. **Run the test script:**
    ```bash
    cd qcells_cloud/custom_components/qcells_cloud
    python test_api.py
    ```
 
-### 🔒 Sicherheitshinweis
+## Security
 
-Die `.env` Datei enthält sensible Daten und wird von Git ignoriert (siehe `.gitignore`). Stelle sicher, dass du die `.env` Datei niemals in Git committest!
+- API credentials are stored securely in Home Assistant's configuration
+- Environment files (`.env`, `.env_prod`) are excluded from version control
+- Never commit sensitive credentials to the repository
 
-## 🐙 GitHub-Veröffentlichung
+## Troubleshooting
 
-Um dieses Projekt sicher auf GitHub zu veröffentlichen:
+### Common Issues
 
-1. **Vor dem ersten Commit:**
-   ```bash
-   # Erstelle deine .env Datei (wird ignoriert)
-   cp .env.example .env
-   # Bearbeite .env mit deinen echten Werten
-   ```
+1. **"Invalid token" error**: Check your API key and LAN adapter registration number
+2. **Connection timeout**: Verify your internet connection and Qcells Cloud availability
+3. **Missing sensors**: Restart Home Assistant after configuration
 
-2. **Überprüfe, was committet wird:**
-   ```bash
-   git status
-   git add .
-   git status  # Stelle sicher, dass .env NICHT in der Liste ist
-   ```
+### Debug Mode
 
-3. **Commit und Push:**
-   ```bash
-   git commit -m "Initial commit: Qcells Cloud Home Assistant Integration"
-   git push origin main
-   ```
+Enable debug logging in Home Assistant:
 
-Die `.gitignore` Datei stellt sicher, dass sensible Daten nicht veröffentlicht werden.
+```yaml
+logger:
+  logs:
+    custom_components.qcells_cloud: debug
+```
 
-## Unterstützte Module
-- `aiohttp` für asynchrone HTTP-Abfragen
-- `voluptuous` für die Eingabevalidierung im Config Flow
-- `homeassistant` als Basisplattform
+## Contributing
 
-## Lizenz
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe die [LICENSE](LICENSE) Datei für Details.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Disclaimer
+
+This integration is not officially affiliated with Qcells or Hanwha. Use at your own risk.
 
