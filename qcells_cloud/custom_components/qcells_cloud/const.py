@@ -6,11 +6,11 @@ DOMAIN = "qcells_cloud"
 PLATFORMS = ["sensor"]
 
 CONF_BASE_URL = "base_url"
-CONF_WIFI_SN = "wifi_sn"
+CONF_WIFI_SN = "wifi_sn"  # This is the LAN Adapter Registration number, NOT the inverter Device SN
 CONF_API_KEY = "api_key"
 CONF_SCAN_INTERVAL = "scan_interval"
 
-DEFAULT_BASE_URL = "https://qhome-ess-g3.q-cells.eu"
+DEFAULT_BASE_URL = "https://qhome-ess-g3.q-cells.eu/proxyApp/proxy/api"
 DEFAULT_SCAN_INTERVAL = 30
 
 # Optional hardcoded fallback values.
@@ -20,7 +20,7 @@ STATIC_BASE_URL = ""
 STATIC_WIFI_SN = ""
 STATIC_API_KEY = ""
 
-API_PATH_REALTIME = "/api/v2/dataAccess/realtimeInfo/get"
+API_PATH_REALTIME = "/getRealtimeInfo.do"
 
 STATUS_MAP: dict[str, str] = {
     "100": "Waiting for operation",

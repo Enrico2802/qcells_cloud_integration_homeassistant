@@ -4,3 +4,6 @@ voluptuous>=0.13.1
 # Wenn du diese Komponente direkt in Home Assistant verwendest, ist das Paket
 # in der HA-Umgebung bereits vorhanden und muss nicht separat installiert werden.
 # homeassistant>=2023.6.0
+
+# For loading environment variables from .env file
+python-dotenv>=1.0.0

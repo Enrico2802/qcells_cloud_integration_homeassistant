@@ -1,0 +1,31 @@
+__pycache__
+.vscode
+*.pyc
+*.pyo
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+
+# Home Assistant config (if copied for testing)
+config/
+configuration.yaml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/

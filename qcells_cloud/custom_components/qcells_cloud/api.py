@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 
 import aiohttp
 
-from .const import API_PATH_REALTIME, STATIC_API_KEY, STATIC_BASE_URL, STATIC_WIFI_SN
+from const import API_PATH_REALTIME, STATIC_API_KEY, STATIC_BASE_URL, STATIC_WIFI_SN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -49,18 +49,16 @@ class QcellsApiClient:
             raise QcellsApiAuthError("Missing API key")
 
         url = urljoin(f"{self._base_url}/", API_PATH_REALTIME.lstrip("/"))
-        headers = {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
+        params = {
             "tokenId": self._api_key,
+            "sn": self._wifi_sn,
         }
-        payload = {"wifiSn": self._wifi_sn}
 
-        _LOGGER.debug("Requesting Qcells realtime data from %s for wifiSn=%s", url, self._wifi_sn)
+        _LOGGER.debug("Requesting Qcells realtime data from %s for sn=%s", url, self._wifi_sn)
 
         try:
             async with asyncio.timeout(self._timeout):
-                response = await self._session.post(url, json=payload, headers=headers)
+                response = await self._session.get(url, params=params)
                 response.raise_for_status()
                 data = await response.json(content_type=None)
         except TimeoutError as err:
@@ -78,7 +76,7 @@ class QcellsApiClient:
         code = data.get("code")
         message = data.get("exception") or "Unknown API error"
 
-        if success is False:
+        if success is False and code != 0:
             if code == 1001:
                 raise QcellsApiAuthError(message)
             raise QcellsApiError(f"Qcells API error {code}: {message}")

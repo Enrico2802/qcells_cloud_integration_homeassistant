@@ -6,7 +6,7 @@
         "description": "Connect Home Assistant to the Qcells Cloud realtime API.",
         "data": {
           "base_url": "Base URL",
-          "wifi_sn": "WiFi SN",
+          "wifi_sn": "LAN Adapter Registration number",
           "api_key": "API key / tokenId",
           "scan_interval": "Polling interval (seconds)"
         }
