@@ -13,7 +13,7 @@ A Home Assistant custom integration for Qcells Cloud solar inverters.
 
 ### Method 1: Manual Installation
 
-1. Copy the `qcells_cloud/custom_components/qcells_cloud/` directory to your Home Assistant `config/custom_components/` directory.
+1. Copy the `custom_components/qcells_cloud/` directory to your Home Assistant `config/custom_components/` directory.
 
 2. Restart Home Assistant.
 
@@ -88,7 +88,7 @@ To test the Qcells API independently:
 
 3. **Run the test script:**
    ```bash
-   cd qcells_cloud/custom_components/qcells_cloud
+   cd custom_components/qcells_cloud
    python test_api.py
    ```
 
