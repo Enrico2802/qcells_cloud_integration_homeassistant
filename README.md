@@ -38,6 +38,12 @@ During setup, you will need to provide:
 - **API Key**: Your Qcells Cloud API token
 - **Polling Interval**: How often to fetch data (10-600 seconds)
 
+> Note: `feedinpowerM2` represents an additional inverter output that is not controllable. The integration also exposes a computed sensor `Total PV Power` that adds `powerdc1` + `powerdc2` + `powerdc3` + `powerdc4` + `feedinpowerM2`.
+
+`feedinpowerM2` is reported separately as `Extra inverter power`; this value represents an additional non-controllable inverter output.
+
+If `powerdc3` or `powerdc4` are null or zero, the calculation still works and treats them as zero.
+
 ## Available Sensors
 
 The integration creates the following sensors:
@@ -45,6 +51,8 @@ The integration creates the following sensors:
 ### Power & Energy
 - AC Power (W)
 - Feed-in Power (W)
+- Total PV Power (W) — calculated from `powerdc1` + `powerdc2` + `powerdc3` + `powerdc4` + `feedinpowerM2`
+- Extra inverter power (W) — `feedinpowerM2`, an additional non-controllable inverter output
 - Battery Power (W)
 - Daily Energy Yield (kWh)
 - Total Energy Yield (kWh)

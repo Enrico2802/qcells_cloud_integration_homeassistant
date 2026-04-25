@@ -95,6 +95,15 @@ SENSORS: tuple[QcellsSensorDescription, ...] = (
         suggested_display_precision=0,
     ),
     QcellsSensorDescription(
+        key="pv_power_total",
+        value_key="pv_power_total",
+        name="Total PV power",
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.POWER,
+        suggested_display_precision=0,
+    ),
+    QcellsSensorDescription(
         key="soc",
         value_key="soc",
         name="Battery SOC",
@@ -141,7 +150,7 @@ SENSORS: tuple[QcellsSensorDescription, ...] = (
     QcellsSensorDescription(
         key="feedinpowerM2",
         value_key="feedinpowerM2",
-        name="Meter 2 power",
+        name="Extra inverter power",
         native_unit_of_measurement=UnitOfPower.WATT,
         state_class=SensorStateClass.MEASUREMENT,
         device_class=SensorDeviceClass.POWER,
@@ -203,6 +212,23 @@ class QcellsRealtimeSensor(QcellsCoordinatorEntity, SensorEntity):
 
     @property
     def native_value(self) -> Any:
+        if self.entity_description.value_key == "pv_power_total":
+            values = [
+                self.coordinator.data.get("powerdc1"),
+                self.coordinator.data.get("powerdc2"),
+                self.coordinator.data.get("powerdc3"),
+                self.coordinator.data.get("powerdc4"),
+                self.coordinator.data.get("feedinpowerM2"),
+            ]
+            total = 0.0
+            for value in values:
+                if value is None:
+                    continue
+                try:
+                    total += float(value)
+                except (TypeError, ValueError):
+                    continue
+            return total
         return self.coordinator.data.get(self.entity_description.value_key)
 
 
