@@ -15,6 +15,8 @@ Für lokale Entwicklung oder wenn du die Python-Bibliotheken manuell installiere
 python -m pip install -r requirements.txt
 ```
 
+> Hinweis: `homeassistant` wird hier nicht als Pflicht-Installation aufgeführt. Wenn du die Integration in einer echten Home Assistant-Instanz nutzt, bringt Home Assistant selbst die benötigten Bibliotheken mit.
+
 ### 2. Home Assistant Custom Component installieren
 1. Kopiere den Ordner `qcells_cloud/custom_components/qcells_cloud` nach `config/custom_components/qcells_cloud` in deiner Home Assistant-Installation.
 2. Starte Home Assistant neu.

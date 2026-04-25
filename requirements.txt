@@ -1,3 +1,6 @@
 aiohttp>=3.8.0
 voluptuous>=0.13.1
-homeassistant>=2023.6.0
+# Optional: nur für lokale Home Assistant Entwicklungszwecke.
+# Wenn du diese Komponente direkt in Home Assistant verwendest, ist das Paket
+# in der HA-Umgebung bereits vorhanden und muss nicht separat installiert werden.
+# homeassistant>=2023.6.0
