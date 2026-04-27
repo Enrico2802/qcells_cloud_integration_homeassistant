@@ -2,8 +2,7 @@
 
 A Home Assistant custom integration for Qcells Cloud solar inverters.
 
-## Problems
-    At the moment the Integration dosent work with HACS its still work in Progress 
+ 
 
 ## Features
 
