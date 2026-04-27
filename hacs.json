@@ -1,13 +1,5 @@
 {
   "name": "Qcells Cloud",
-  "content": "integration",
-  "domain": "qcells_cloud",
-  "config_flow": true,
-  "documentation": "README.md",
-  "zip_release": false,
   "render_readme": true,
-  "homeassistant": "2023.12.0",
-  "hacs": {
-    "type": "integration"
-  }
+  "homeassistant": "2025.1.0"
 }
