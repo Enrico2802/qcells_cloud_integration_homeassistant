@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 
 import aiohttp
 
-from const import API_PATH_REALTIME, STATIC_API_KEY, STATIC_BASE_URL, STATIC_WIFI_SN
+from .const import API_PATH_REALTIME, STATIC_API_KEY, STATIC_BASE_URL, STATIC_WIFI_SN
 
 _LOGGER = logging.getLogger(__name__)
 
